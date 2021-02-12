@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap");
+body {
+  font-family: "Open Sans Condensed", sans-serif;
+}
+.invert {
+  filter: invert(100%);
+}
+.invert img {
+  filter: invert(100%);
+}
+.dropdown-menu {
+  position: absolute;
+  transform: translate3d(0px, 37px, 0px);
+  top: -2px;
+  left: 0px;
+  will-change: transform;
+}
+.jumbotron,
+.bg-light {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+.bg-light,
+.bg-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.bg-dark {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #fff;
+  background-color: #565d5e;
+}
