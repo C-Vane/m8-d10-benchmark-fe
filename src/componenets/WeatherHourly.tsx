@@ -38,10 +38,10 @@ const WeatherHourly = (props: Coord) => {
 
                     {hourly.length > 0 && hourly.map((h, key) => {
                         const { weather, temp, feels_like, pressure, humidity, dt } = h;
-                        return <Col key={key} style={{ minWidth: "200px" }} className="day">
+                        return <Col key={key} style={{ minWidth: "200px" }} className="border-right ">
                             <Col className="rounded text ">
                                 <Image src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} fluid />
-                                <b className="text-nowrap">{weather.map((w) => w.description + ", ")}</b>
+                                <b className="text-nowrap">{weather.map((w) => w.description + " ")}</b>
                             </Col>
                             <Col className="d-flex flex-column text-nowrap align-content-start">
                                 <p>Avg. Temp : <b>{(temp - 273.15).toFixed(1)} C</b></p>
