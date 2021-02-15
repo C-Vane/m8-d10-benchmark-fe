@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, FormControl, Jumbotron, Nav, Navbar } from 'react-bootstrap';
 import { Button, Row } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
@@ -28,7 +28,7 @@ const SearchPage = () => {
             })
             if (response.ok) {
                 const data = await response.json()
-                const suggestionsArray = data.data.map((l: CitySuggest) => l.name.split(" ")[0]).filter(unique)
+                const suggestionsArray = data.data.map((l: CitySuggest) => l.name).filter(unique)
                 setSuggestions(suggestionsArray)
             } else {
                 console.log(response)
@@ -44,7 +44,13 @@ const SearchPage = () => {
             getSuggestions(text)
         }
     }
+    useEffect(() => {
+        const hr = new Date().getHours()
+        if (hr > 17 || hr < 6) {
+            setTheme(false)
+        }
 
+    }, [])
     return <div>
 
         <Navbar bg={theme ? "light" : "dark"} expand="lg">

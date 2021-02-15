@@ -8,7 +8,8 @@ const WeatherDetails = (props: PropsWeatherDetails) => {
     const [image, setImage] = useState("")
 
     useEffect(() => {
-        props.search.length > 0 && getWeather() && getImage()
+        const hr = new Date().getHours()
+        props.search.length > 0 && getWeather() && (hr > 17 || hr < 6) ? getImage("night") : getImage("day")
     }, [props.search])
     const getWeather = async () => {
         try {
@@ -26,15 +27,16 @@ const WeatherDetails = (props: PropsWeatherDetails) => {
         }
 
     }
-    const getImage = async () => {
+    const getImage = async (time: string) => {
         try {
-            const response = await fetch(process.env.REACT_APP_LOCATION_IMAGE_URL + props.search + " landscape")
+            const response = await fetch(process.env.REACT_APP_LOCATION_IMAGE_URL + props.search)
             if (response.ok) {
                 console.log(response)
                 const data = await response.json()
                 setImage(data.results[0].urls.full)
                 console.log(data)
             } else {
+                setImage('')
                 console.log(response)
             }
         } catch (error) {
