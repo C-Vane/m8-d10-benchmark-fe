@@ -126,7 +126,22 @@ export interface PropsWeatherDetails {
     search: string;
     setInput: (search: string) => void;
     theme: boolean;
+    favorites: string[];
+    lat: number;
+    lon: number;
 }
 export interface PropsWeatherToday {
-    weather: WeatherMain
+    weather: WeatherMain;
+    favorite: boolean;
+}
+
+export interface User {
+    favoriteLocations: string[];
+    _id: string;
+    img: string;
+    name: string;
+    surname: string;
+    email: string;
+    createdAt: Date;
+    updatedAt: Date;
 }

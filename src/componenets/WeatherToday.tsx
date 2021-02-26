@@ -1,19 +1,26 @@
 import { SIGXFSZ } from 'constants';
-import React from 'react';
+import React, { useState } from 'react';
 import { Col } from 'react-bootstrap';
 import { Container, Image, Jumbotron, Row } from 'react-bootstrap';
 import { PropsWeatherToday } from '../types/interfaces';
+import { postFunction } from './CRUDFunctions';
 import WeatherHourly from './WeatherHourly';
 import WeatherWeekly from './WeatherWeekly';
 const WeatherToday = (props: PropsWeatherToday) => {
     const { coord, main, name, weather, wind, sys, visibility } = props.weather;
+    const [fav, setFav] = useState(props.favorite)
     const todate = (num: number) => {
         const date = new Date(num * 1000)
         const humanReadable = date.toLocaleString("en-US", { hour: "numeric" })
         return (humanReadable)
     }
+
+    const handleFavorite = async () => {
+        const user = await postFunction("users/addorRemovelocation", { location: name })
+        user.favoriteLocations.includes(name.toLowerCase()) ? setFav(true) : setFav(false)
+    }
     return <div>
-        <h1 className="text-white"> {name}, {sys.country} </h1>
+        <h1 className="text-white"> {name}, {sys.country} ,  <b onClick={handleFavorite} style={{ cursor: "pointer" }} className="float-right"> <i className={fav ? 'fa fa-star ml-5' : 'far fa-star ml-5'} aria-hidden='true'></i></b> </h1>
 
         <Jumbotron fluid className=" p-4 m-0 d-flex">
             <Container>

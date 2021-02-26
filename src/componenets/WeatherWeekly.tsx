@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Jumbotron, Col, Image } from 'react-bootstrap';
 import Scrollbars from 'react-custom-scrollbars';
 import { Coord, Daily } from '../types/interfaces';
+import { getFunction } from './CRUDFunctions';
 
 const WeatherWeekly = (props: Coord) => {
     const [weekly, setWeekly] = useState<Daily[]>([])
@@ -9,19 +10,13 @@ const WeatherWeekly = (props: Coord) => {
         getWeek()
     }, [])
     const getWeek = async () => {
-        try {
-            const response = await fetch(process.env.REACT_APP_WEATHER_URL_ONECALL + `?lat=${props.lat}&lon=${props.lon}&exclude=current,minutely,alerts,hourly&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units="metric"`)
-            if (response.ok) {
-                const data = await response.json()
-                setWeekly(data.daily)
-            } else {
-                console.log(response)
-            }
-        } catch (error) {
-            console.log(error)
-
+        const response = await getFunction(`weather/getWeek?lat=${props.lat}&lon=${props.lon}`)
+        console.log(response)
+        if (response) {
+            setWeekly(response)
+        } else {
+            console.log(response)
         }
-
     }
     const todate = (num: number) => {
         const date = new Date(num * 1000)

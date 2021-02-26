@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Col, Container, Image, Jumbotron, Row } from 'react-bootstrap';
 import Scrollbars from 'react-custom-scrollbars';
 import { Coord, Hourly } from '../types/interfaces';
+import { getFunction } from './CRUDFunctions';
 
 const WeatherHourly = (props: Coord) => {
     const [hourly, setHourly] = useState<Hourly[]>([])
@@ -9,19 +10,12 @@ const WeatherHourly = (props: Coord) => {
         getHourly()
     }, [props])
     const getHourly = async () => {
-        try {
-            const response = await fetch(process.env.REACT_APP_WEATHER_URL_ONECALL + `?lat=${props.lat}&lon=${props.lon}&exclude=current,daily,minutely,alerts&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units="metric"`)
-            if (response.ok) {
-                const data = await response.json()
-                setHourly(data.hourly)
-            } else {
-                console.log(response)
-            }
-        } catch (error) {
-            console.log(error)
-
+        const response = await getFunction(`weather/getHourly?lat=${props.lat}&lon=${props.lon}`)
+        if (response) {
+            setHourly(response)
+        } else {
+            console.log(response)
         }
-
     }
 
     const todate = (num: number) => {
