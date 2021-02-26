@@ -133,6 +133,7 @@ export interface PropsWeatherDetails {
 export interface PropsWeatherToday {
     weather: WeatherMain;
     favorite: boolean;
+    setLoading: Function;
 }
 
 export interface User {

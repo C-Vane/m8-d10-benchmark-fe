@@ -50,7 +50,7 @@ const WeatherToday = (props: PropsWeatherToday) => {
             </Container>
         </Jumbotron>
         <Container className="w-100 p-0 m-0">
-            <Row><WeatherHourly lat={coord.lat} lon={coord.lon} /></Row>
+            <Row><WeatherHourly lat={coord.lat} lon={coord.lon} setLoading={props.setLoading} /></Row>
             <Row><WeatherWeekly lat={coord.lat} lon={coord.lon} /></Row>
         </Container>
     </div>;

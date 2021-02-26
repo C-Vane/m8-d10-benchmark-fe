@@ -4,7 +4,7 @@ import Scrollbars from 'react-custom-scrollbars';
 import { Coord, Hourly } from '../types/interfaces';
 import { getFunction } from './CRUDFunctions';
 
-const WeatherHourly = (props: Coord) => {
+const WeatherHourly = (props: any) => {
     const [hourly, setHourly] = useState<Hourly[]>([])
     useEffect(() => {
         getHourly()
@@ -16,6 +16,7 @@ const WeatherHourly = (props: Coord) => {
         } else {
             console.log(response)
         }
+        props.setLoading(false)
     }
 
     const todate = (num: number) => {

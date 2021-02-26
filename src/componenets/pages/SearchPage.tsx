@@ -208,6 +208,7 @@ const SearchPage = () => {
                         <Container className='p-5 mt-5'>
                             <h1 className={theme ? "" : "text-white"}>Welcome to Strive Weather App</h1>
                             <h4 className={theme ? "" : "text-white"}>Get the weather for any city</h4>
+                            {!user && <h3 className={theme ? "mt-4" : "mt-4 text-white"} > Get started </h3>}
                         </Container>
                     </Jumbotron>
                 )}
