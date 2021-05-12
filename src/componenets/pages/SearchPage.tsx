@@ -57,7 +57,7 @@ const SearchPage = () => {
         window.location.reload();
     };
     const changeSuggestion = (text: string) => {
-        if (text.length > 3 && suggest) {
+        if (text.length > 2 && suggest) {
             getSuggestions(text);
         }
         setInput(text);
@@ -98,7 +98,7 @@ const SearchPage = () => {
                     <Navbar.Collapse id='basic-navbar-nav '>
                         {user && (
                             <>
-                                {" "}
+
                                 <Form
                                     inline
                                     className='w-75 position-relative'
@@ -110,17 +110,19 @@ const SearchPage = () => {
                                         setSuggestions([]);
                                     }}
                                 >
-                                    <FormControl
-                                        onBeforeInput={() => setStart(false)}
-                                        type='text'
-                                        value={input}
-                                        onChange={(e) => changeSuggestion(e.target.value)}
-                                        placeholder='Enter a city'
-                                        className='mr-sm-2 w-75 '
-                                    />
-                                    <Button variant={theme ? "outline-primary" : "outline-light"} type='submit' disabled={input.length <= 0}>
-                                        WEATHER
-                  </Button>
+                                    <div className="d-flex justify-content-around">
+                                        <FormControl
+                                            onBeforeInput={() => setStart(false)}
+                                            type='text'
+                                            value={input}
+                                            onChange={(e) => changeSuggestion(e.target.value)}
+                                            placeholder='Enter a city'
+                                            className='mr-sm-2 w-75 '
+                                        />
+                                        <Button variant={theme ? "outline-primary" : "outline-light"} type='submit' disabled={input.length <= 0}>
+                                            WEATHER
+                                        </Button>
+                                    </div>
 
                                     <div className={input.length < 1 ? "dropdown-menu" : "dropdown-menu show w-75"}>
                                         {input.length > 0 && <Button
@@ -149,12 +151,12 @@ const SearchPage = () => {
                                     </div>
                                 </Form>
                                 <Dropdown>
-                                    <Dropdown.Toggle variant='link' id='dropdown-basic' onMouseEnter={getUser}>
+                                    <Dropdown.Toggle variant='link' id='dropdown-basic' className={!theme ? "text-light" : "text-dark"} onMouseEnter={getUser}>
                                         <i className='far fa-star' aria-hidden='true'></i>
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        {user.favoriteLocations.length > 0 ? user.favoriteLocations.map((location, key) => (
+                                        {user.favoriteLocations?.length > 0 ? user.favoriteLocations.map((location, key) => (
                                             <Dropdown.Item
                                                 key={key}
                                                 onClick={() => {
@@ -170,19 +172,19 @@ const SearchPage = () => {
                             </>
                         )}
 
-                        <Form className='w-25' style={{ position: "absolute", right: "0", maxWidth: "100px" }}>
+                        {/*<Form className='w-25' style={{ position: "absolute", right: "0", maxWidth: "100px" }}>
                             <Form.Check type='switch' id='custom-switch' label={theme ? "Dark" : "Light"} onChange={() => setTheme(!theme)} className={theme ? "" : "text-white"} />
-                        </Form>
+                                            </Form>*/}
                     </Navbar.Collapse>
                     {user ? (
                         <Button variant={theme ? "outline-success" : "outline-light"} onClick={() => logOut()}>
                             Log out
                         </Button>
                     ) : (
-                            <Button variant={theme ? "outline-success" : "outline-light"} onClick={() => setSignUp(!signUp)}>
-                                Sign Up
-                            </Button>
-                        )}
+                        <Button variant={theme ? "outline-success" : "outline-light"} onClick={() => setSignUp(!signUp)}>
+                            Sign Up
+                        </Button>
+                    )}
                 </Container>
             </Navbar>
 
@@ -191,28 +193,28 @@ const SearchPage = () => {
                     <WeatherDetails search={search} setInput={setSearch} theme={theme} favorites={user ? user.favoriteLocations : []} lat={currentLat} lon={currentLon} />
                 </div>
             ) : (
-                    <Jumbotron
-                        className='m-0 '
-                        fluid
-                        style={{
-                            minHeight: "100vh",
-                            backgroundImage: `${theme
-                                ? 'url("https://images.theconversation.com/files/232705/original/file-20180820-30593-1nxanpj.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=496&fit=clip")'
-                                : 'url("https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2017/08/Lauarvann-Aurora-Metorite-e1502725566161.jpg?resize=750%2C500&ssl=1"'
-                                }`,
-                            backgroundRepeat: "no-repeat",
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                        }}
-                    >
-                        <Container className='p-5 mt-5'>
-                            <h1 className={theme ? "" : "text-white"}>Welcome to Strive Weather App</h1>
-                            <h4 className={theme ? "" : "text-white"}>Get the weather for any city</h4>
-                            {!user && <h3 className={theme ? "mt-4" : "mt-4 text-white"} > Get started </h3>}
-                        </Container>
-                    </Jumbotron>
-                )}
-            {signUp && <SignUp />}
+                <Jumbotron
+                    className='m-0 pt-3 '
+                    fluid
+                    style={{
+                        minHeight: "100vh",
+                        backgroundImage: `${theme
+                            ? 'url("https://images.theconversation.com/files/232705/original/file-20180820-30593-1nxanpj.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=496&fit=clip")'
+                            : 'url("https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2017/08/Lauarvann-Aurora-Metorite-e1502725566161.jpg?resize=750%2C500&ssl=1"'
+                            }`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                    }}
+                >
+                    <Container className='p-5 '>
+                        <h1 className={theme ? "" : "text-white"}>Welcome to Strive Weather App</h1>
+                        <h4 className={theme ? "" : "text-white"}>Get the weather for any city</h4>
+                        {!user && <h3 className={theme ? "mt-4" : "mt-4 text-white"} > Get started </h3>}
+                    </Container>
+                </Jumbotron>
+            )}
+            {signUp && <SignUp setUser={setUser} setSignUp={setSignUp} />}
         </div>
     );
 };

@@ -16,7 +16,7 @@ const WeatherToday = (props: PropsWeatherToday) => {
     }
 
     const handleFavorite = async () => {
-        const user = await postFunction("users/addorRemovelocation", { location: name })
+        const user = await postFunction("users/addorRemovelocation", { location: `${name}, ${sys.country}` })
         user.favoriteLocations.includes(name.toLowerCase()) ? setFav(true) : setFav(false)
     }
     return <div>

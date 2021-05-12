@@ -135,7 +135,13 @@ export interface PropsWeatherToday {
     favorite: boolean;
     setLoading: Function;
 }
+export interface PropsSignUp {
+    setUser: Function;
+    setSignUp: Function;
+}
+export interface PropsLogIn extends PropsSignUp {
 
+}
 export interface User {
     favoriteLocations: string[];
     _id: string;
