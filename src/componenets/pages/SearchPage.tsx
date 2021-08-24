@@ -119,7 +119,7 @@ const SearchPage = () => {
                                             placeholder='Enter a city'
                                             className='mr-sm-2 w-75 '
                                         />
-                                        <Button variant={theme ? "outline-primary" : "outline-light"} type='submit' disabled={input.length <= 0}>
+                                        <Button variant={theme ? "primary" : "outline-light"} type='submit' disabled={input.length <= 0}>
                                             WEATHER
                                         </Button>
                                     </div>
