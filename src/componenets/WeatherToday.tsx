@@ -20,7 +20,7 @@ const WeatherToday = (props: PropsWeatherToday) => {
         user.favoriteLocations.includes(name.toLowerCase()) ? setFav(true) : setFav(false)
     }
     return <div>
-        <h1 className="text-white"> {name}, {sys.country} ,  <b onClick={handleFavorite} style={{ cursor: "pointer" }} className="float-right"> <i className={fav ? 'fa fa-star ml-5' : 'far fa-star ml-5'} aria-hidden='true'></i></b> </h1>
+        <h1> {name}, {sys.country} ,  <b onClick={handleFavorite} style={{ cursor: "pointer" ,color:"white", textShadow:"0px 0px 11px rgba(0, 0, 63, 1)"}} className="float-right"> <i className={fav ? 'fa fa-star ml-5' : 'far fa-star ml-5'} aria-hidden='true'></i></b> </h1>
 
         <Jumbotron fluid className=" p-4 m-0 d-flex">
             <Container>
